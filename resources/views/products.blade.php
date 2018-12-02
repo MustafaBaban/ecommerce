@@ -11,13 +11,6 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/styles/shop_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url('/styles/shop_responsive.css') }}">
 <style>
-.owl-stage{
-    max-height: 200px;
-}
-.popular_categories{
-    padding-top:10px;
-    padding-bottom:10px;
-}
 .shop{
     padding-top:20px;
 }
@@ -54,6 +47,7 @@
 							<div class="filter_price">
 								<div id="slider-range" class="slider_range"></div>
 								<p>Range: </p>
+
 								<p><input type="text" id="amount" class="amount" readonly style="border:0; font-weight:bold;"></p>
 							</div>
 						</div>
