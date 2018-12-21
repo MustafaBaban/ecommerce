@@ -19,7 +19,7 @@
                                 <i class="zmdi zmdi-account-o"></i>
                             </div>
                             <div class="text">
-                                <h2>10368</h2>
+                            <h2>{{count($users)}}</h2>
                                 <span>Users Registered</span>
                             </div>
                         </div>

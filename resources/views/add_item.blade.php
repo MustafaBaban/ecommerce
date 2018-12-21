@@ -43,6 +43,7 @@
                                         </div><div class="col-5 col-md-3">
                                             <input type="number" id="price-input" name="ram" placeholder="RAM-IN-GB" class="form-control">
                                         </div></div>
+
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                             <label for="password-input" class=" form-control-label">Category</label>
@@ -62,7 +63,32 @@
                                                 <label for="text-input" class=" form-control-label">Screen size</label>
                                             </div><div class="col-5 col-md-3">
                                             
-                                        <input type="text" id="text-input" name="screen_size" placeholder="Screen-IN-INCHES" class="form-control"></div></div><div class="row form-group">
+                                        <input type="text" id="text-input" name="screen_size" placeholder="Screen-IN-INCHES" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="password-input" class=" form-control-label">Brand</label>
+                                    </div>
+                                    <div class="col-5 col-md-3">
+                                        <select name="brand_id" id="SelectLm" class="form-control-sm form-control">
+                                            <option value="0">Please select</option>
+                                            <option value="1">Option #1</option>
+                                            <option value="2">Option #2</option>
+                                            <option value="3">Option #3</option>
+                                            <option value="4">Option #4</option>
+                                            <option value="5">Option #5</option>
+                                        </select>
+                                    </div>
+
+                                <div class="col col-md-3">
+                                            <label for="text-input" class=" form-control-label">Color</label>
+                                        </div><div class="col-5 col-md-3">
+                                        
+                                    <input type="text" id="text-input" name="color" placeholder="Color" class="form-control">
+                                </div>
+                            </div>
+                                        <div class="row form-group">
                                         <div class="col col-md-3">
                                             <label for="password-input" class=" form-control-label">Inventory</label>
                                         </div>

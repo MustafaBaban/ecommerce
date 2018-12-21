@@ -2,15 +2,51 @@
 
 namespace App\Http\Controllers;
 use App\Product;
+use App\Category;
+use App\Brand;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
 
     public function index(){
-        $products = Product::inRandomOrder()->take(8)->get();
-        return view('products')->with('products',$products);
+
+        $products = Product::take(0)->paginate(2);
+        // $products = Product::get();
+        $categories = Category::get();
+        
+        $brands = Brand::get();
+        
+        return view('products',compact('products','categories','brands'));
     }
+
+    public function filter(Request $request){
+        $products = Product::get();
+        // dd($request->category_id);
+        $price = 10000;
+        if(isset($request->category_id)){
+        $products = $products->where('category_id',$request->category_id);
+        }
+
+        if(isset($request->brand_id)){
+        $products = $products->where('brand_id',$request->brand_id);
+        }
+
+        if(isset($request->search)){
+        $products = $products->where ( 'name', 'LIKE',  '%'. $request->search . '%');
+        }
+
+        if(isset($request->price) && $request->price != 10000){
+        $products = $products->where('price','<',$request->price);
+        $price =$request->price;
+        }
+        
+        $categories = Category::get();
+        $brands = Brand::get();
+        
+        return view('products',compact('products','categories','brands','price'));
+    }
+
 
     public function show($slug){
         $product = Product::where('slug',$slug)->firstOrFail();
@@ -59,6 +95,11 @@ class ProductController extends Controller
         $products = Product::all();
        
         return view('items')->with('products',$products);
+    }
+
+    public function like($id){
+        $product = Product::where('id',$id)->update(['vote_count' => 1]);
+        return true;
     }
 
 }

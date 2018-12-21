@@ -18,6 +18,57 @@
 @stop
 
 @section('content')
+{{-- modal --}}
+<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="mediumModalLabel">PC-Specification</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table table-striped">
+					<tbody>
+					  <tr>
+						<th scope="row">Name</th>
+						<td>Mark</td>
+						<th scope="row">RAM</th>
+						<td>Mark</td>
+					  </tr>
+					  <tr>
+						<th scope="row">CPU</th>
+						<td>Jacob</td>
+						<th scope="row">GPU</th>
+						<td>Jacob</td>
+
+					  </tr>
+					  <tr>
+						<th scope="row">Color</th>
+						<td>Larry</td>
+						<th scope="row">Hard Drive</th>
+						<td>Larry</td>
+
+					  </tr>
+					  <tr>
+						<th scope="row">Screen Size</th>
+						<td>Larry</td>
+						<th scope="row">Brand</th>
+						<td>Larry</td>
+
+					  </tr>
+
+					</tbody>
+				  </table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+			</div>
+		</div>
+	</div>
+</div>
 <div class="single_product">
 		<div class="container">
 			<div class="row">
@@ -25,15 +76,15 @@
 				<!-- Images -->
 				<div class="col-lg-2 order-lg-1 order-2">
 					<ul class="image_list">
-						<li data-image="images/single_4.jpg"><img src="images/single_4.jpg" alt=""></li>
-						<li data-image="images/single_2.jpg"><img src="images/single_2.jpg" alt=""></li>
-						<li data-image="images/single_3.jpg"><img src="images/single_3.jpg" alt=""></li>
+					<li data-image="{{url('images/a (1).jpg')}}"><img src="{{url('images/a (1).jpg')}}" alt=""></li>
+						<li data-image="{{url('images/a (2).jpg')}}"><img src="{{url('images/a (2).jpg')}}" alt=""></li>
+						<li data-image="{{url('images/a (3).jpg')}}"><img src="{{url('images/a (3).jpg')}}" alt=""></li>
 					</ul>
 				</div>
 
 				<!-- Selected Image -->
 				<div class="col-lg-5 order-lg-2 order-1">
-					<div class="image_selected"><img src="images/single_4.jpg" alt=""></div>
+					<div class="image_selected"><img src="{{url('images/a (3).jpg')}}" alt=""></div>
 				</div>
 
 				<!-- Description -->
@@ -56,6 +107,7 @@
 											<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
 										</div>
 									</div>
+									<button type="button" class="button cart_button" data-toggle="modal" data-target="#mediumModal">Details</button>
 
 									<!-- Product Color -->
 									<ul class="product_color">
@@ -87,7 +139,8 @@
 
 			</div>
 		</div>
-    </div>
+	</div>
+
     @stop
 
 	@section('custom_js')

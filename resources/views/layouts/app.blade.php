@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>OneTech</title>
+<title>Placeholder</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="OneTech shop project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
-<link href="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="plugins/slick-1.8.0/slick.css">
-<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
-<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+<link rel="stylesheet" type="text/css" href="{{ url('styles/bootstrap4/bootstrap.min.css') }}">
+<link href="{{ url('plugins/fontawesome-free-5.0.1/css/fontawesome-all.css') }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ url('plugins/OwlCarousel2-2.2.1/owl.carousel.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url('plugins/OwlCarousel2-2.2.1/owl.theme.default.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url('plugins/OwlCarousel2-2.2.1/animate.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url('plugins/slick-1.8.0/slick.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url('styles/main_styles.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url('styles/responsive.css') }}">
+<style>
+.wishlist_cart {
+	height: 120px !important;
+}
+.header_search{
+	height: 120px !important;
+	padding-left: 50px;
+}
+.logo_container{
+	height: 120px !important;
+	
+}
+</style>
 @yield('custom_css')
 
 </head>
@@ -25,7 +38,7 @@
 	<!-- Header -->
 	
 	<header class="header">
-
+		
 		<!-- Top Bar -->
 
 		<div class="top_bar">
@@ -37,29 +50,31 @@
 						<div class="top_bar_content ml-auto">
 							<div class="top_bar_menu">
 								<ul class="standard_dropdown top_bar_dropdown">
+									@auth
 									<li>
-										<a href="#">English<i class="fas fa-chevron-down"></i></a>
+									<a href="#"><div class="user_icon"><img src="{{url('images/user.svg')}}" alt=""></div>{{auth()->user()->name}}<i class="fas fa-chevron-down"></i></a>
 										<ul>
-											<li><a href="#">Italian</a></li>
-											<li><a href="#">Spanish</a></li>
-											<li><a href="#">Japanese</a></li>
+											<li><a href="{{ route('logout' )}}">Logout</a></li>
+											@if(auth()->user()->is_admin == 1)
+											<li><a href="{{ route('admin' )}}">Admin</a></li>
+											@endif
+										
 										</ul>
 									</li>
+									@endauth
+
+									@guest
 									<li>
-										<a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li><a href="#">EUR Euro</a></li>
-											<li><a href="#">GBP British Pound</a></li>
-											<li><a href="#">JPY Japanese Yen</a></li>
-										</ul>
+									<a href="{{route('register')}}"><div class="user_icon"><img src="{{url('images/user.svg')}}" alt=""></div>Register</a>
 									</li>
+
+									<li>
+										<a href="{{route('login')}}">Login</a>
+									</li>
+									@endguest
 								</ul>
 							</div>
-							<div class="top_bar_user">
-								<div class="user_icon"><img src="images/user.svg" alt=""></div>
-								<div><a href="{{route('register')}}">Register</a></div>
-								<div><a href="{{route('login')}}">Sign in</a></div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -75,7 +90,8 @@
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="#"><img src="images/logo.png" style="max-height:220px;max-width:220px;" alt=""></a></div>
+								{{-- <img src="{{url('images/a.svg')}}" style="max-height:240px;max-width:180px;padding-bottom:15px;" alt=""> --}}
+						<div class="logo"><a href="{{route('welcome')}}"><img src="{{url('images/logo1.png')}}" style="max-height:240px;max-width:180px;padding-bottom:15px;" alt=""></a></div>
 						</div>
 					</div>
 
@@ -84,9 +100,10 @@
 						<div class="header_search">
 							<div class="header_search_content">
 								<div class="header_search_form_container">
-									<form action="#" class="header_search_form clearfix">
-										<input type="search" required="required" class="header_search_input" placeholder="Search for products...">
-										<div class="custom_dropdown">
+									<form action="/products" method="GET" role="search" class="header_search_form clearfix">
+										
+										<input type="search" required="required" name="search" class="header_search_input" placeholder="Search for products...">
+										<div class="custom_dropdown" style="display: none">
 											<div class="custom_dropdown_list">
 												<span class="custom_dropdown_placeholder clc">All Categories</span>
 												<i class="fas fa-chevron-down"></i>
@@ -119,14 +136,14 @@
 							</div>
 
 							<!-- Cart -->
-							<div class="cart">
+							<div class="cart" >
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
 										<img src="{{ url('images/cart.png') }}" alt="">
 										<div class="cart_count"><span>10</span></div>
 									</div>
 									<div class="cart_content">
-										<div class="cart_text"><a href="#">Cart</a></div>
+										<div class="cart_text"><a href="{{url('/cart')}}">Cart</a></div>
 										<div class="cart_price">$85</div>
 									</div>
 								</div>
@@ -140,15 +157,18 @@
         @yield('content')
 	<!-- Footer -->
 
+	<div class="container">
+			<hr>
+		</div>
+
 	<footer class="footer">
-		<hr>
 		<div class="container">
 			<div class="row">
 
 				<div class="col-lg-3 footer_col">
 					<div class="footer_column footer_contact">
 						<div class="logo_container">
-							<div class="logo"><a href="#">OneTech</a></div>
+							<div class="logo"><a href="#">PlaceHolder	</a></div>
 						</div>
 						<div class="footer_title">Got Question? Call Us 24/7</div>
 						<div class="footer_phone">+38 068 005 3570</div>
@@ -216,46 +236,22 @@
 		</div>
 	</footer>
 
-	<!-- Copyright -->
 
-	<div class="copyright">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					
-					<div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
-						<div class="copyright_content"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</div>
-						<div class="logos ml-sm-auto">
-							<ul class="logos_list">
-								<li><a href="#"><img src="{{ url('images/logos_1.png') }}" alt=""></a></li>
-								<li><a href="#"><img src="{{ url('images/logos_2.png') }}" alt=""></a></li>
-								<li><a href="#"><img src="{{ url('images/logos_3.png') }}" alt=""></a></li>
-								<li><a href="#"><img src="{{ url('images/logos_4.png') }}" alt=""></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
 
 
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/greensock/TweenMax.min.js"></script>
-<script src="plugins/greensock/TimelineMax.min.js"></script>
-<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="plugins/greensock/animation.gsap.min.js"></script>
-<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/slick-1.8.0/slick.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="js/custom.js"></script>
+<script src="{{ url('js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url('styles/bootstrap4/popper.js') }}"></script>
+<script src="{{ url('styles/bootstrap4/bootstrap.min.js') }}"></script>
+<script src="{{ url('plugins/greensock/TweenMax.min.js') }}"></script>
+<script src="{{ url('plugins/greensock/TimelineMax.min.js') }}"></script>
+<script src="{{ url('plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
+<script src="{{ url('plugins/greensock/animation.gsap.min.js') }}"></script>
+<script src="{{ url('plugins/greensock/ScrollToPlugin.min.js') }}"></script>
+<script src="{{ url('plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
+<script src="{{ url('plugins/slick-1.8.0/slick.js') }}"></script>
+<script src="{{ url('plugins/easing/easing.js') }}"></script>
+<script src="{{ url('js/custom.js') }}"></script>
 @yield('custom_js')
 
 </body>

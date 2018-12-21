@@ -56,8 +56,8 @@
 						</div>
 
 						<div class="cart_buttons">
-							<button type="button" class="button cart_button_clear">Add to Cart</button>
-							<button type="button" class="button cart_button_checkout">Add to Cart</button>
+						<a type="button" href="{{url()->previous()}}" class="button cart_button_clear">Back</a>
+							<button type="button" class="button cart_button_checkout">Checkout</button>
 						</div>
 					</div>
 				</div>
